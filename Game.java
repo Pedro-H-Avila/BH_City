@@ -78,11 +78,11 @@ public class Game {
         
         casa.setExit("sul", motel);
         casa.setExit("oeste", escritorio);
-        casa.setExit("oeste",sobeeDesce);
+        casa.setExit("norte",sobeeDesce);
        
         motel.setExit("norte", casa);
         
-        sobeeDesce.setExit("leste", casa);
+        sobeeDesce.setExit("sul", casa);
 
         //currentRoom = escritorio; // start game outside
         
