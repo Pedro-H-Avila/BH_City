@@ -11,7 +11,7 @@ import java.util.*;
  * east, south, west. For each direction, the room stores a reference
  * to the neighboring room, or null if there is no exit in that direction.
  * 
- * @author Michael Kölling and David J. Barnes
+ * @author Michael KÃ¶lling and David J. Barnes
  * @version 2016.02.29
  */
 public class Room {
@@ -69,7 +69,7 @@ public class Room {
     }
 
     public String getLongDescription() {
-        return "You are " + description + "\n" + "Exits: " + getExitString() + "\n" + getItems();
+        return "Você está " + description + "\n" + "Saídas: " + getExitString() + "\n" + getItems();
     }
 
     public String getItems(){
@@ -78,7 +78,7 @@ public class Room {
         for(String key: keys){
             information +=    key + ":" +itensOnRoom.get(key).getQtdeItens() + " ";
         }
-        return "Items of room:"+information;
+        return "Itens da sala:"+information;
     }
 
        public void dropItem(Item item)
@@ -87,7 +87,7 @@ public class Room {
             itensOnRoom.remove(item);
         }
         else {
-            System.out.println("Nao ha item para remover");
+            System.out.println("Nao há item para remover");
         }
     }
 
