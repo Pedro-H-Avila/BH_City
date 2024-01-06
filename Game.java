@@ -14,7 +14,7 @@ import javax.sound.midi.Soundbank;
  * rooms, creates the parser and starts the game. It also evaluates and
  * executes the commands that the parser returns.
  * 
- * @author Michael Kölling and David J. Barnes
+ * @author Michael KÃ¶lling and David J. Barnes
  * @version 2016.02.29
  */
 
@@ -40,42 +40,58 @@ public class Game {
         Room mineirao, pirulito, guanabara, mangabeiras, pBandeira, pPapa, pLiberdade, escritorio, casa, motel, sobeeDesce;
 
         // create the rooms
-        mineirao = new Room("mais conhecido como gigante da Pampulha (Salao de festas do Galo DOIDO!!!)");
-        guanabara = new Room("o parqe da familia, Guanabara, uma festa a cada dia!");
-        pBandeira = new Room("belas vistas num conhecido ponto turistico");
-        pPapa = new Room("amem na praça do Papa, irmaos");
-        pLiberdade = new Room("bem bonito as fontes, o problema eh us mendigo tomando banho");
-        pirulito = new Room("só lembro que existe quando o meu time ganha alguma coisa...(Já fazem mais de 84 anos)");
-        mangabeiras = new Room("mangueiras eh bom para levar as crianças");
-        escritorio = new Room("eu to cansado, chefe");
-        casa = new Room("lar, doce lar");
-        motel = new Room("isso, mais forte, yamete kudasai, ahn, ahn ahn");
-        sobeeDesce = new Room("Tá se perdendo no personagem!!!");
+        mineirao = new Room("no Mineirão: mais conhecido como gigante da Pampulha (Salão de festas do Galo DOIDO!!!)");
+        guanabara = new Room("no Parque Guanabara: o parque da família, Guanabara, uma festa a cada dia!");
+        pBandeira = new Room("na Praça da Bandeira: belas vistas num conhecido ponto turístico");
+        pPapa = new Room("na Praça do Papa: amém na praça do Papa, irmãos");
+        pLiberdade = new Room("na Praça da Liberdade: bem bonito as fontes, o problema eh us mendigo tomando banho");
+        pirulito = new Room("na Praça Sete: Só lembro que existe quando o meu time ganha alguma coisa...(Já fazem mais de 84 anos)");
+        mangabeiras = new Room("no mangueiras eh bom para levar as crianças");
+        escritorio = new Room("no Escritório: eu to cansado, chefe");
+        casa = new Room(" em Casa: lar, doce lar");
+        motel = new Room(" no Motel: isso, mais forte, yamete kudasai, ahn, ahn ahn");
+        sobeeDesce = new Room("no Sobe e Desce :) - Tá se perdendo no personagem!!!");
 
         // initialise room exits
         mineirao.setExit("norte",guanabara);
         mineirao.setExit("leste",escritorio);
-        pirulito.setExit("norte",escritorio);
-        pirulito.setExit("norte", pLiberdade);
+        
+        pirulito.setExit("norte", escritorio);
+        pirulito.setExit("sul", pLiberdade);
+        
         guanabara.setExit("sul", mineirao);
         pBandeira.setExit("oeste" , pLiberdade);
         pBandeira.setExit("sul" , pPapa);
         pBandeira.setExit("leste" , mangabeiras);
+        
         pPapa.setExit("norte", pBandeira);
         pPapa.setExit("sul", mangabeiras);
+        
         pLiberdade.setExit("sul", pirulito);
         pLiberdade.setExit("leste", pBandeira);
+        
         mangabeiras.setExit("oeste", pBandeira);
-        escritorio.setExit( "leste", casa);
-	escritorio.setExit("oeste", mineirao);
-	escritorio.setExit("sul",pirulito);
+        
+        escritorio.setExit("oeste", mineirao);
+        escritorio.setExit("sul", pirulito);
+        escritorio.setExit("norte", pLiberdade);
+        
         casa.setExit("sul", motel);
         casa.setExit("oeste", escritorio);
-	casa.setExit("oeste",sobeeDesce);
+        casa.setExit("oeste",sobeeDesce);
+       
         motel.setExit("norte", casa);
-	sobeeDesce.setExit("leste", casa);
+        
+        sobeeDesce.setExit("leste", casa);
 
-        currentRoom = casa; // start game outside
+        //currentRoom = escritorio; // start game outside
+        
+        List<Room> possiveisLugaresParaComecar = Arrays.asList(mineirao, guanabara, pBandeira, pPapa, pLiberdade, pirulito, mangabeiras, motel, sobeeDesce);
+        
+        Random random = new Random();
+        do{
+            currentRoom = possiveisLugaresParaComecar.get(random.nextInt(possiveisLugaresParaComecar.size()));
+        } while(currentRoom.equals(casa));
     }
 
     /**
@@ -258,7 +274,7 @@ public class Game {
             currentRoom.gainItem(secondWord, itemPlayer);
             player.dropItem(secondWord);
         }else{
-            System.out.println("Ce possui ess trem naum meu fi");
+            System.out.println("Ce possui esse trem naum meu fi");
         }
 
         String itensOfPlayer = player.getItems();
