@@ -1,8 +1,5 @@
 import java.util.*;
-import javax.sound.midi.Soundbank;
-import java.net.URL;
-import javax.swing.*;
-import javax.sound.sampled.*;
+
 
 /**
  * This class is the main class of the "World of Zuul" application.
@@ -17,7 +14,7 @@ import javax.sound.sampled.*;
  * rooms, creates the parser and starts the game. It also evaluates and
  * executes the commands that the parser returns.
  * 
- * @author Michael Kölling and David J. Barnes
+ * @author Michael KÃ¶lling and David J. Barnes
  * @version 2016.02.29
  */
 
@@ -47,28 +44,28 @@ public class Game {
         Room mineirao, pirulito, guanabara, mangabeiras, pBandeira, pPapa, pLiberdade, escritorio, casa, motel, sobeeDesce;
 
         // create the rooms
-        mineirao = new Room("mais conhecido como gigante da Pampulha (Salao de festas do Galo DOIDO!!!)");
-        guanabara = new Room("o parqe da familia, Guanabara, uma festa a cada dia!");
-        pBandeira = new Room("belas vistas num conhecido ponto turistico");
-        pPapa = new Room("amem na praça do Papa, irmaos");
-        pLiberdade = new Room("bem bonito as fontes, o problema eh us mendigo tomando banho");
-        pirulito = new Room("só lembro que existe quando o meu time ganha alguma coisa...(Já fazem mais de 84 anos)");
-        mangabeiras = new Room("mangueiras eh bom para levar as crianças");
-        escritorio = new Room("eu to cansado, chefe");
-        currentRoom.createItem("Dinheiro para fazer os trem aqui", 50, "dinheiro");
-        casa = new Room("lar, doce lar");
-        motel = new Room("isso, mais forte, yamete kudasai, ahn, ahn ahn");
-        sobeeDesce = new Room("Tá se perdendo no personagem!!!");
+        mineirao = new Room("Mineirao: Mais conhecido como gigante da Pampulha (Salao de festas do Galo DOIDO!!!)");
+        guanabara = new Room("Guanabara: O parque da familia, Guanabara, uma festa a cada dia!");
+        pBandeira = new Room("praça da bandeira: Belas vistas num conhecido ponto turistico.");
+        pPapa = new Room("praça do papa: Amem na praÃ§a do Papa, irmaos.");
+        pLiberdade = new Room("Praca da liberdade: Bem bonito as fontes, o problema eh us mendigo tomando banho.");
+        pirulito = new Room("Pirulito da praca 7 de setembro: So lembro que existe quando o meu time ganha alguma coisa...(Ja fazem mais de 84 anos!).");
+        mangabeiras = new Room("mangabeiras: eh bom para levar as criancas.");
+        escritorio = new Room("The Office: Eu to cansado, chefe!");
+        casa = new Room("Casa: lar, doce lar.");
+        
+        motel = new Room("Motel: isso, mais forte, yamete kudasai, ahn, ahn ahn!");
+        sobeeDesce = new Room("sobe e Desce: Ta se perdendo no personagem!!!");
 
-         // initialise room exits
+           // initialise room exits
         mineirao.setExit("norte",guanabara);
         mineirao.setExit("leste",escritorio);
         //---------------------------------------------
-        pirulito.setExit("norte", escritorio);
+        pirulito.setExit("oeste", sobeeDesce);
         pirulito.setExit("sul", pLiberdade);
         //---------------------------------------------
-        guanabara.setExit("norte", mineirao);
-        guanabara.setExit("sul", mangabeiras);
+        guanabara.setExit("sul", mineirao);
+        guanabara.setExit("leste", mangabeiras);
         //---------------------------------------------
         pBandeira.setExit("leste" , pLiberdade);
         pBandeira.setExit("sul" , pPapa);
@@ -77,7 +74,7 @@ public class Game {
         pPapa.setExit("norte", pBandeira);
         pPapa.setExit("sul", mangabeiras);
         //---------------------------------------------
-        pLiberdade.setExit("sul", pirulito);
+        pLiberdade.setExit("norte", pirulito);
         pLiberdade.setExit("oeste", pBandeira);
         //---------------------------------------------
         mangabeiras.setExit("leste", pBandeira);
@@ -102,6 +99,7 @@ public class Game {
         
         // room's function
         if(currentRoom == casa){
+            currentRoom.createItem("Dinheiro para fazer os trem aqui", 50, "dinheiro");
             boolean roleta = random.nextBoolean();
             Room passeio = passear.get(random.nextInt(startspoint.size()));
             if(roleta) {
@@ -110,11 +108,11 @@ public class Game {
                 quit(command);
                 }
                 else{
-                    currentRoom.createItem("Para momentos memoraveis", 1, "camera");
+                    currentRoom.createItem("Para momentos memoraveis", 1, "camera.");
                     currentRoom.createItem("Um dia feliz (triste), um bom lugar para ler um livro...", 1, "livro");
                     System.out.println("Filhos: papai, podemos ir ate "+passear+"hoje?");
                     System.out.println("Claro!");
-                    System.out.println("Esposa: que legal! Se divirtam"); 
+                    System.out.println("Esposa: que legal! Se divirtam."); 
                 }
             }
             else {
@@ -129,7 +127,7 @@ public class Game {
             System.out.println("Chefe: voce precisa de quantas notas de R$50?");
             int notas = tec.nextInt();
             System.out.println("Chefe: vou emprestar R$"+(50*notas)+". Mas voce devera me pagar em horas extras...");
-            player.createItem("Dinheiro pois vivemos num mundo capitalista e necessitamos de um meio de troca eficiente para transaçoes economicas",(50*notas), "dinheiro");
+            player.createItem("Dinheiro pois vivemos num mundo capitalista e necessitamos de um meio de troca eficiente para transacoes economicas.",(50*notas), "dinheiro");
             player.pickItem("dinheiro");
             
         }
@@ -141,31 +139,31 @@ public class Game {
                 System.out.println("Familia curtiu um role no parque da familia e todos se divertiram, parabens!");
             }
             else{
-                System.out.println("Voce acabou com o passeio da propria familia. Gamer Over");
+                System.out.println("Voce acabou com o passeio da propria familia. Gamer Over.");
                 quit(command);
             }
         }
         
         else if(currentRoom == mineirao){
-            System.out.println("Hoje nao tem jogo ;-;. Voce quer uma camisa do galo? Custa R$200");
+            System.out.println("Hoje nao tem jogo ;-;. Voce quer uma camisa do galo? Custa R$200.");
             String choose = tec.nextLine().toLowerCase();
-            if(choose == "sim"){
+            if(choose.equals("sim")){
                 System.out.println("Quantas camisas?");
                 int qtdade = tec.nextInt();
                 if(item.getQtdeItem("dinheiro") == 200*qtdade){
-                    currentRoom.createItem("Voce eh muito galo doido, torce para o maior de Minas", qtdade, "Camisa do Galo");
+                    currentRoom.createItem("Voce eh muito galo doido, torce para o maior vice de Minas", qtdade, "Camisa do Galo.");
                     player.dropItem("dinheiro", (200*qtdade));
                 }
             }
-            else
+            else 
                 System.out.println("Ataque da galoucura kkkkkkkkkkk. JOSIAS TOG ON. PERDEU TUDO!!");
-                System.out.println("Voce realizou o sonho de todo homem: morrer em briga de torcida organizada");
+                System.out.println("Voce realizou o sonho de todo homem: morrer em briga de torcida organizada.");
                 quit(command);
         }
         
         else if(currentRoom == mangabeiras){
-            System.out.println("Aqui eh um luga bom dmais para deixar as crianças brincando");
-            System.out.println("Eh um bom momento para ler um livro para passar o tempo");
+            System.out.println("Aqui eh um luga bom dmais para deixar as crianÃ§as brincando.");
+            System.out.println("Eh um bom momento para ler um livro para passar o tempo.");
             if(player.getItem("livro") != null){
                 player.pickItem("Livro");
             }
@@ -176,26 +174,26 @@ public class Game {
         }
         
         else if(currentRoom == pLiberdade){
-            System.out.println("Voce eh uma boa pessoa? Digite sim ou nao");
+            System.out.println("Voce eh uma boa pessoa? Digite <sim> ou <nao>.");
             String choose = tec.nextLine().toLowerCase();
             if(choose == "sim"){
-                System.out.println("De um trocado para seu mendigo, Oh BH abundante");
+                System.out.println("De um trocado para seu mendigo, Oh BH abundante.");
                 int doar = tec.nextInt();
                 player.dropItem("dinheiro", doar);
-                System.out.println("Agora os mendigos vao comprar cachaça!");
+                System.out.println("Agora os mendigos vao comprar cachaca!");
             }
             else
                 player.dropItem("dinheiro", 999);
-                System.out.println("Ataque dos mendigo loko kkkkkkkkkkk. PERDEU TUDO");
+                System.out.println("Ataque dos mendigo loko kkkkkkkkkkk. PERDEU TUDO.");
         }
         
         else if(currentRoom == pPapa){
                 tec.nextLine();
                 String choose = tec.nextLine().toLowerCase();
-                System.out.println("Voce vai orar? Digite sim ou nao");
+                System.out.println("Voce vai orar? Digite <sim> ou <nao>.");
                 if(choose == "sim"){
-                    currentRoom.createItem("Uma biblia para acompanhar a oraçao, amem", 1, "Biblia");
-                    currentRoom.createItem("Bendito seja este irmao", 1, "bençao");
+                    currentRoom.createItem("Uma biblia para acompanhar a oracao, amem!", 1, "Biblia.");
+                    currentRoom.createItem("Bendito seja este irmao", 1, "bencao.");
                     player.pickItem("Biblia");
                     player.pickItem("bencao");
                     System.out.println("Em nome do Pai, do filho, e do espirito santo...");
@@ -206,13 +204,13 @@ public class Game {
         }
         
         else if(currentRoom == pBandeira){
-            System.out.println("Momento agradavel com a familia, merece uma foto");
+            System.out.println("Momento agradavel com a familia, merece uma foto.");
             if(player.getItem("camera") != null){
-                currentRoom.createItem("Recordaçao feliz", 1, "foto");
+                currentRoom.createItem("Recordacao feliz", 1, "foto(s).");
                 player.pickItem("foto");
             }
             else{
-                System.out.println("Foi divertido");
+                System.out.println("Foi divertido!");
             }
         }
         
@@ -220,56 +218,56 @@ public class Game {
             while(currentRoom == pirulito){
                 tec.nextLine();
                 String choose = tec.nextLine().toLowerCase();
-                System.out.println("OLHA O CHIP DA TIIIIIIIM? Digite sim ou nao caso queira");
+                System.out.println("OLHA O CHIP DA TIIIIIIIM? Digite <sim> ou <nao> caso queira.");
                 if(choose == "sim"){
-                    currentRoom.createItem("Agora tens um numero novo", 1, "chip da tim");
+                    currentRoom.createItem("Agora tens um numero novo", 1, "chip da tim.");
                     player.pickItem("chip da tim");
                     player.dropItem("dinheiro", 20);
-                    System.out.println("Novo numero adquirido");
+                    System.out.println("Novo numero adquirido!");
                 }
 
                 else{
-                    System.out.println("Quer naum");
+                    System.out.println("Quer naum B( ");
                 }
                 
-                System.out.println("OLHA O CHIP DA Vivo? Digite sim ou nao caso queira");
+                System.out.println("OLHA O CHIP DA Vivo? Digite <sim> ou <nao> caso queira.");
                 tec.nextLine();
                 choose = tec.nextLine().toLowerCase();
                 if(choose == "sim"){
-                    currentRoom.createItem("Agora tens um numero novo", 1, "chip da vivo");
+                    currentRoom.createItem("Agora tens um numero novo", 1, "chip da vivo!");
                     player.pickItem("chip da vivo");
                     player.dropItem("dinheiro", 20);
-                    System.out.println("Novo numero adquirido");
+                    System.out.println("Novo numero adquirido!");
                 }
 
                 else{
-                    System.out.println("Quer naum");
+                    System.out.println("Quer naum :/ ");
                 }
                 
                 tec.nextLine();
                 choose = tec.nextLine().toLowerCase();
-                System.out.println("OLHA O CHIP DA Claro? Digite sim ou nao caso queira");
+                System.out.println("OLHA O CHIP DA Claro? Digite <sim> ou <nao> caso queira.");
                 if(choose == "sim"){
-                    currentRoom.createItem("Agora tens um numero novo", 1, "chip da claro");
+                    currentRoom.createItem("Agora tens um numero novo", 1, "chip da claro.");
                     player.pickItem("chip da claro");
                     player.dropItem("dinheiro", 20);
-                    System.out.println("Novo numero adquirido");
+                    System.out.println("Novo numero adquirido!");
                 }
 
                 else{
-                    System.out.println("Quer naum");
+                    System.out.println("Quer naum ¬_¬");
                 }
                 
                 tec.nextLine();
                 choose = tec.nextLine().toLowerCase();
-                System.out.println("COMPRO OOOOUROOO? Digite sim ou nao caso queira");
+                System.out.println("COMPRO OOOOUROOO? Digite sim ou nao caso queira.");
                 if(choose == "sim"){
                     if(player.getItem("ouro") != null)
-                    currentRoom.createItem("Dinheiro pois vivemos num mundo capitalista e necessitamos de um meio de troca eficiente para transaçoes economicas",(500), "dinheiro");
+                    currentRoom.createItem("Dinheiro pois vivemos num mundo capitalista e necessitamos de um meio de troca eficiente para transacoes economicas",(500), "dinheiro.");
                     player.pickItem("dinheiro");
                     player.dropItem("ouro", 1);
                     currentRoom.gainItem("ouro", item );
-                    System.out.println("Reserva boa mesmo eh biticonho");
+                    System.out.println("Reserva boa mesmo eh biticonho.");
                 }
                 else{
                 System.out.println("Quer naum");
@@ -277,18 +275,18 @@ public class Game {
                 
                 tec.nextLine();
                 choose = tec.nextLine().toLowerCase();
-                System.out.println("FOTO 3x4? Digite sim ou nao caso queira");
+                System.out.println("FOTO 3x4? Digite <sim> ou <nao> caso queira.");
                 if(choose == "sim"){
                     player.dropItem("dinheiro", 15);
                     player.pickItem("foto");
-                    System.out.println("Bonitaum meu nobre");
+                    System.out.println("Bonitaum meu nobre.");
                 }
 
                 else{
-                    System.out.println("Quer naum");
+                    System.out.println("Quer naum (º^º) ");
                 }
                 
-                currentRoom.createItem("Profissional do eita bixo kkkkk", 1, "dama da noite");
+                currentRoom.createItem("Profissional do eita bixo kkkkk", 1, "dama da noite!");
                 System.out.println("Oi gostoso, rsrs. Quer se divertir em algum lugar?");
                 tec.nextLine();
                 choose = tec.nextLine().toLowerCase();
@@ -298,7 +296,7 @@ public class Game {
                     currentRoom = motel;
                 }
                 else{
-                    System.out.println("Saia, sou da tropa dos 100% fiel");
+                    System.out.println("Saia, sou da tropa dos 100% fiel!!!");
                 }
                 goRoom(command);
             }
@@ -310,12 +308,12 @@ public class Game {
                 System.out.println("Ui. que delicia...");
                 System.out.println("TOC TOC");
                 System.out.println("TOC TOC TOC TOC TOC!!!");
-                System.out.println("Sua esposa acaba de adentrar furiosa... Gamer Over");
+                System.out.println("Sua esposa acaba de adentrar furiosa... Gamer Over.");
                 quit(command);     
             }
             else{
                 if(wifeWant = true){
-                    System.out.println("O novo herdeiro vem, rsrs");
+                    System.out.println("O novo herdeiro vem, rsrs.");
                 }
                 else{
                     System.out.println("Voce nao deveria estar aqui...");
@@ -324,9 +322,9 @@ public class Game {
             }
         }
         
-        do{
+        
             currentRoom = startspoint.get(random.nextInt(startspoint.size()));
-        } while(currentRoom.equals(casa));
+         while(currentRoom.equals(casa));
     }
 
 
@@ -344,7 +342,7 @@ public class Game {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Soh força");
+        System.out.println("nuu, Soh forca.");
     }
 
     /**
@@ -353,8 +351,9 @@ public class Game {
     private void printWelcome() {
         System.out.println();
         System.out.println("Coe ze, BH eh nois, fraga?");
-        System.out.println("Eh aqui que eu amuuuuuuuu, eh aqui queu quero fica, pois num ha luga meioh que BH");
-        System.out.println("Que qui pega, ze. Ce vai aparecer num canto aleatorio di BH e tem que ih pra casa, fraga? Podi se importante pega uns trem");
+        System.out.println("Eh aqui que eu amuuuuuuuu, eh aqui queu quero fica, pois num ha luga meioh que BH.");
+        System.out.println("Que qui pega, ze. Ce vai aparecer num canto aleatorio di BH e tem que ih pra casa, fraga? Podi se importante pega uns trem.");
+        System.out.println("Quando não sober o que fazer no jogo digite "+"help"+"e os comandos iram aparecer.");
         System.out.println();
         printLocationInfo();
     }
@@ -369,7 +368,7 @@ public class Game {
         boolean wantToQuit = false;
 
         if (command.isUnknown()) {
-            System.out.println("Viaja ni mim naum");
+            System.out.println("Viaja ni mim naum.");
             return false;
         }
 
@@ -406,8 +405,8 @@ public class Game {
      * command words.
      */
     private void printHelp() {
-        System.out.println("Ta perdidin, dirocha. Tu vai logali");
-        System.out.println("Eh o seguinte, ze");
+        System.out.println("Ta perdidin, dirocha. Tu vai logali.");
+        System.out.println("Eh o seguinte, ze.");
         System.out.println();
         System.out.println("Voce vai fazer isso aqui, fraga ,ze?");
         parser.showCommands();
@@ -420,7 +419,7 @@ public class Game {
     private void goRoom(Command command) {
         if(command.getCommandWord().equals("back")){
             if(oldRooms.size() == 0){
-                System.out.println("Ta viajanu meu fi kkk, dirocha memu"); 
+                System.out.println("Ta viajano meu fi kkk, dirocha memo."); 
                 return; 
             }else{      
                 currentRoom = oldRooms.pop();
@@ -430,7 +429,7 @@ public class Game {
 
         }else if (!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
-            System.out.println("Vai ondi kkkkk? Loko de toddyn estragado");
+            System.out.println("Vai ondi kkkkk? Loko de toddyn estragado.");
             return;
         }
 
@@ -456,7 +455,7 @@ public class Game {
      */
     private boolean quit(Command command) {
         if (command.hasSecondWord()) {
-            System.out.println("Vaza");
+            System.out.println("Vaza!");
             return false;
         } else {
             return true; // signal that we want to quit
@@ -478,7 +477,7 @@ public class Game {
         Item itemRoom = currentRoom.getItem(secondWord);
 
         if (itemRoom == null) {
-            System.out.println("Tem ess trem aqui naum");
+            System.out.println("Tem ess trem aqui naum!");
             return;
         }
 
@@ -510,7 +509,7 @@ public class Game {
             currentRoom.gainItem(secondWord, itemPlayer);
             player.dropItem(secondWord, 1);
         }else{
-            System.out.println("Ce possui ess trem naum meu fi");
+            System.out.println("Ce possui ess trem naum meu fi.");
         }
 
         String itensOfPlayer = player.getItems();
